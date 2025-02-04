@@ -1,0 +1,6 @@
+@EndUserText.label: 'Header Service Definition'
+define service Z_SD_HEADER_11563 {
+  expose Z_I_HEADER_PROJ_11563;
+  expose Z_I_ITEM_PROJ_11563;
+  expose Z_I_ADDRESS_PROJ_11563;
+}

@@ -1,0 +1,31 @@
+projection implementation in class zbp_i_header_proj_11563 unique;
+
+strict ( 2 );
+
+define behavior for Z_I_HEADER_PROJ_11563 //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use action changestatus;
+  use association _address { create; }
+  use association _item { create; }
+}
+
+define behavior for Z_I_ADDRESS_PROJ_11563 //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _header;
+}
+
+define behavior for Z_I_ITEM_PROJ_11563 //alias <alias_name>
+{
+  use update;
+  use delete;
+  use action addAmount;
+
+  use association _header;
+}

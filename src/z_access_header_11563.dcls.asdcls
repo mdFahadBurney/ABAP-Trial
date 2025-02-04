@@ -1,0 +1,12 @@
+@EndUserText.label: 'Access Control for Header CDS View'
+@MappingRole: true
+define role Z_ACCESS_HEADER_11563 {
+    grant 
+        select
+            on
+                Z_I_HEADER_11563;
+                 //   where
+                   //   ( CompCd ) = aspect pfcg_auth(Z_COMP_CD, Z_AUTH_FLD,ACTVT = '03');
+            // CompCd = 'C001';
+                        
+}

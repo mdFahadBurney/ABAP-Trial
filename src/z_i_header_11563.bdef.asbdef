@@ -1,0 +1,92 @@
+managed implementation in class zbp1_i_header_11563 unique;
+strict ( 2 );
+
+define behavior for Z_I_HEADER_11563 //alias <alias_name>
+persistent table ztm_header_e1156
+with additional save
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+ mapping for ztm_header_e1156{
+
+Docno = docno; // CDS Field Name = Table Value Name
+  CompCd = comp_cd;
+  PurchOrg = purch_org;
+  Currency = currency;
+  SupplierNo = supplier_no;
+  Status = status;
+  ChangedAt = changed_at;
+  CreatedAt = created_at;
+  CreatedBy = created_by;
+
+ }
+
+ field ( mandatory ) SupplierNo;
+  association _address { create; }
+  association _item { create; }
+action changestatus result[1] $self;
+
+}
+
+define behavior for Z_I_ADDRESS_11563 //alias <alias_name>
+persistent table ztd_address_1156
+lock dependent by _header
+authorization dependent by _header
+//etag master <field_name>
+{
+  update;
+  delete;
+ field ( readonly ) Docno;
+  association _header;
+
+mapping for ztd_address_1156{
+Docno = docno;
+AddressNo = address_no;
+Name = name;
+StreetAddr = street_addr;
+City = city;
+Country = country;
+ContactNo = contact_no;
+}
+
+}
+
+define behavior for Z_I_ITEM_R_11563 //alias <alias_name>
+persistent table ztd_item_e1156
+with additional save
+lock dependent by _header
+authorization dependent by _header
+//etag master <field_name>
+{
+  update;
+  delete;
+ field ( readonly ) Docno;
+  association _header;
+
+  mapping for ztd_item_e1156{
+  Docno = docno;
+ItemNo = item_no;
+Status = status;
+Quantity = quantity;
+ItemAmt = item_amt;
+TaxAmt = tax_amt;
+Currency = currency;
+ChangedAt = changed_at;
+CreatedAt = created_at;
+CreatedBy = created_by;
+
+
+  }
+  action addAmount result[1] $self;
+  validation createDate on save { field CreatedAt; create;}
+  validation dateValidate on save { field ChangedAt ; create; }
+
+    determination updateItemAmt on modify { field Quantity; create;}
+  determination updateTaxAmt on save { field ItemAmt; }
+
+}

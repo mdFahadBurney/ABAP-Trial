@@ -1,0 +1,11 @@
+@EndUserText.label: 'Access Control for Projection view'
+@MappingRole: true
+define role Z_AC_PROJ_11563 {
+    grant
+        select
+            on
+                Z_I_HEADER_PROJ_11563
+                    where
+                        inheriting conditions from entity z_i_header_11563;
+                        
+}

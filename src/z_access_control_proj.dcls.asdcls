@@ -1,0 +1,11 @@
+@EndUserText.label: 'Access Control for Header Proj CDS View'
+@MappingRole: true
+define role Z_ACCESS_CONTROL_PROJ {
+    grant
+        select
+            on
+                Z_I_HEADER_PROJ_11563
+                    where
+                        inheriting conditions from entity Z_I_HEADER_11563;
+                        
+}
